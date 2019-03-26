@@ -19,22 +19,15 @@ class MainContent extends Component {
       if (this.state.ingredientList.length > 0){
         for(let i = 0; i < this.state.ingredientList.length; i++) {
           if (meal.ingredientsRequired.includes(this.state.ingredientList[i].name)){
-            if (this.state.ingredientList[i].isChecked) return true
+            if (this.state.ingredientList[i].isChecked) {
+              return true
+            }
           }
         }
       } else {
         return true
       }
     })
-    // assign totals && sort
-    // let total = 0
-    // ingredientsRequired.map(ingredient => {
-    //     for (let i = 0; i < ingredientList.length; i++) {
-    //       if (ingredientList[i].name === ingredient) {
-    //         total++;
-    //       }
-    //     }
-    // })
     // display
     const filteredMeals = meals.map((meal) =>
         <Meal key={meal.idMeal} meal={meal} ingredientList={this.state.ingredientList}/>
@@ -49,7 +42,6 @@ class MainContent extends Component {
             ingredient={this.state.ingredient}
             ingredientList={this.state.ingredientList}
           />
-          <button onClick={this.filterMeals}>Filter</button>
         </div>
         <div>
           {filteredMeals}

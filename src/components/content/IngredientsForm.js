@@ -28,7 +28,7 @@ class IngredientsForm extends Component {
           What's in your fridge?
         </label>
         <form onSubmit={handleSubmit}>
-          <input value={ingredient} name='ingredient' onChange={handleChange}/>
+          <input className='input' value={ingredient} name='ingredient' onChange={handleChange}/>
           <input type="submit" value="submit" />
         </form>
         {ingredients}
