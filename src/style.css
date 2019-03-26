@@ -2,3 +2,15 @@
   background-color: 'red';
   font-size: 40;
 }
+
+.badge {
+  position: absolute;
+  margin-left: 227px;
+  background-color: #ff4242;
+  color: white;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  margin-top: 250px;
+  padding: 5px;
+}

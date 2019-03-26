@@ -8,20 +8,18 @@ class IngredientsForm extends Component {
       ingredient: '',
       ingredientList: [],
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleChange = this.handleChange.bind(this)
-    this.handleRemove = this.handleRemove.bind(this)
   }
 
   render(){
-    const ingredients = this.state.ingredientList.map((ingredient, index) =>
+    const {handleChange, handleRemove, handleSubmit, ingredient, ingredientList} = this.props
+    const ingredients = ingredientList.map((ingredient, index) =>
       <Ingredient
         key={index}
         name={ingredient.name}
         isChecked={ingredient.isChecked}
         index={index}
-        handleRemove={this.handleRemove}
-        handleChange={this.handleChange}
+        handleRemove={handleRemove}
+        handleChange={handleChange}
       />
     )
     return (
@@ -29,42 +27,13 @@ class IngredientsForm extends Component {
         <label>
           What's in your fridge?
         </label>
-        <form onSubmit={this.handleSubmit}>
-          <input value={this.state.ingredient} name='ingredient' onChange={this.handleChange}/>
+        <form onSubmit={handleSubmit}>
+          <input value={ingredient} name='ingredient' onChange={handleChange}/>
           <input type="submit" value="submit" />
         </form>
         {ingredients}
       </div>
     )
-  }
-
-  handleSubmit (event) {
-      this.setState(prevState => ({
-        ingredientList: [...prevState.ingredientList, {name: prevState.ingredient, isChecked: true}],
-        ingredient:'',
-      }))
-      event.preventDefault()
-  }
-
-  handleChange (event, index) {
-    const name = event.target.name
-    if (event.target.type !== 'checkbox'){
-      this.setState({
-        [name]: event.target.value,
-      })
-    } else {
-      const ingredientList = this.state.ingredientList
-      ingredientList[index].isChecked = event.target.checked
-      this.setState({ ingredientList: ingredientList})
-    }
-
-  }
-
-  handleRemove (index) {
-    const newList = this.state.ingredientList.filter((ingredient, i) => index !== i)
-    this.setState({
-      ingredientList: newList
-    })
   }
 }
 

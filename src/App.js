@@ -36,6 +36,15 @@ class App extends Component {
       fetch(mealUrl)
         .then(response => response.json())
         .then(data =>{
+          let ingredientsRequired = []
+          for (let propertyName in data.meals[0]){
+            if (propertyName.includes('strIngredient')) {
+              if (data.meals[0][propertyName]) {
+                ingredientsRequired.push(data.meals[0][propertyName].toLowerCase())
+              }
+            }
+          }
+          data.meals[0].ingredientsRequired = ingredientsRequired
           mealsArr.push(data.meals[0])
           if (this.state.meals.length === mealsArr.length){
             this.setState({
@@ -48,12 +57,13 @@ class App extends Component {
 
   }
 
+
   render(){
     if (this.state.loading) return <h1>Loading...</h1>
     return (
       <div className="App">
         <Header title="Recipe Finder"/>
-        <MainContent meals={this.state.meals} />
+        <MainContent meals={this.state.meals} filterMeals={this.filterMeals} />
       </div>
     );
   }
